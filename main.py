@@ -3,7 +3,8 @@ import constants
 import player
 import asteroid 
 import asteroidfields
-import sysd
+import shot
+import sys
 from logger import log_state, log_event
 
 
@@ -16,10 +17,13 @@ def game_loop():
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
+    shot.Shot.containers = (shots, updatable, drawable)
     asteroid.Asteroid.containers = (asteroids, updatable, drawable)
     player.Player.containers = (updatable, drawable)
     asteroidfields.AsteroidField.containers = (updatable,)
     my_asteroid_field = asteroidfields.AsteroidField()
+    first_shot = shot.Shot(0,0)  # Dummy to set containers
     my_player = player.Player(constants.SCREEN_WIDTH / 2, constants.SCREEN_HEIGHT / 2)
 
     
